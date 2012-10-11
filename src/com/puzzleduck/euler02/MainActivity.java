@@ -1,12 +1,18 @@
 package com.puzzleduck.euler02;
 
 import android.app.*;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.*;
 import android.view.*;
+import android.view.View.OnClickListener;
 import android.widget.*;
 import android.text.*;
 import android.text.style.*;
 import java.util.*;
+
+
+
 import android.graphics.*;
 import android.util.*;
 
@@ -40,6 +46,41 @@ public class MainActivity extends Activity implements View.OnClickListener
 	}
 
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.layout.menulayout, menu);
+ 
+        return true;
+    }
+    
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+        case R.id.aboutapp:
+            setContentView(R.layout.aboutapp);
+
+    		//listeners for menu
+          findViewById(R.id.githubButton).setOnClickListener( (OnClickListener) this);
+          findViewById(R.id.visitEulerButton).setOnClickListener( (OnClickListener) this);
+          findViewById(R.id.photoButton).setOnClickListener( (OnClickListener) this);
+            return true;
+        case R.id.aboutdev:
+            setContentView(R.layout.aboutdev);
+    		Button appsButton = (Button)findViewById(R.id.appsButton);
+    		appsButton.setOnClickListener(this);
+            findViewById(R.id.appsButton).setOnClickListener( (OnClickListener) this);
+            findViewById(R.id.dropboxButton).setOnClickListener( (OnClickListener) this);
+            findViewById(R.id.githubButton).setOnClickListener( (OnClickListener) this);
+            findViewById(R.id.contactDevButton).setOnClickListener( (OnClickListener) this);
+            return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+    
+    
+    
 	public void onClick(View p1)
 	{
 		if(p1.getId() == R.id.compute)
@@ -83,6 +124,56 @@ public class MainActivity extends Activity implements View.OnClickListener
 			resultView.setText("\n\nGrand total: " + sumTotal + "\n\n");
 		
 		}//compute
+		
+
+
+        if(p1.getId() == R.id.contactDevButton)
+        {
+          Intent intent = new Intent(Intent.ACTION_SEND);
+          intent.setType("plain/text");
+          intent.putExtra(android.content.Intent.EXTRA_EMAIL, new String[]{"puzzleduck+euler01@gmail.com"});
+          intent.putExtra(android.content.Intent.EXTRA_SUBJECT, "User feedback for Eular 02: ");
+          intent = Intent.createChooser(intent, "Thank you for your feedback, please select an app:");
+        	startActivity(intent);
+        }//if contact button
+
+        
+        if(p1.getId() == R.id.appsButton)
+        {
+        	Intent intent = new Intent(Intent.ACTION_VIEW);
+        	intent.setData(Uri.parse("market://search?q=PuZZleDucK Industries"));
+        	startActivity(intent);
+        }//if apps button
+
+        if(p1.getId() == R.id.dropboxButton)
+        {
+        	Intent intent = new Intent(Intent.ACTION_VIEW);
+        	intent.setData(Uri.parse("http://db.tt/41Y5NAS"));
+        	startActivity(intent);
+        }//if apps button
+
+        if(p1.getId() == R.id.githubButton)
+        {
+        	Intent intent = new Intent(Intent.ACTION_VIEW);
+        	intent.setData(Uri.parse("https://github.com/PuZZleDucK/Euler02"));
+        	startActivity(intent);
+        }//if apps button
+
+        if(p1.getId() == R.id.visitEulerButton)
+        {
+        	Intent intent = new Intent(Intent.ACTION_VIEW);
+        	intent.setData(Uri.parse("http://projecteuler.net/problems"));
+        	startActivity(intent);
+        }//if apps button
+        
+        if(p1.getId() == R.id.photoButton)
+        {
+        	Intent intent = new Intent(Intent.ACTION_VIEW);
+        	intent.setData(Uri.parse("http://es.fotopedia.com/users/1cn802s648dlg"));
+        	startActivity(intent);
+        }//if apps button
+        
+        
 		
 	}//click
 
