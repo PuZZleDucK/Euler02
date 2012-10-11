@@ -7,7 +7,7 @@
 	
 
 	<TextView 
-		android:text="This is my programmatic solution to the Euler challenge 2... Fibonacci somethingorother... sum to four million... blah blah... read the question thoroughly doofus."
+		android:text="@+string/main_text"
 		android:gravity="center"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content" />
